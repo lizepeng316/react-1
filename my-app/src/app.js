@@ -13,10 +13,11 @@ class App extends React.Component{
       this.addData = this.addData.bind(this);
       this.search = this.search.bind(this);
       this.onChange = this.onChange.bind(this);
+      this.backData = this.backData.bind(this);
       }
    // 添加数据
   addData(){
-  const arr = this.state.data
+  var arr = this.state.data
   const arr2 = this.state.showData
   arr.push(this.state.input)
   arr2.push(this.state.input)
@@ -41,9 +42,13 @@ class App extends React.Component{
       this.setState({
         showData:arr
       })
-    }
+    } 
   }
- 
+  // 返回原列表
+  backData(){
+    this.setState({showData : this.state.data})
+  }
+
   onChange(i){
     if(i.target.className === "add"){
       this.setState({
@@ -80,7 +85,8 @@ class App extends React.Component{
           <button onClick={this.addData}>add</button>
           <input className='search' onChange={this.onChange}></input>
           <button onClick={this.search}>search</button>
-          {todoList(this.state.showData,this.delData)}
+          <button onClick={this.backData}>back</button>
+          {todoList(this.state.showData,this.delData,this.backData)}
       </div>
     )
   }
