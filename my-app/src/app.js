@@ -6,13 +6,24 @@ class App extends React.Component{
       super(props);
       this.state = {
         data : [],
+        showData:[],
         input : '',
-        search:''
+        search : ''
       };
+      this.addData = this.addData.bind(this);
       this.search = this.search.bind(this);
       this.onChange = this.onChange.bind(this);
       }
-
+   // 添加数据
+  addData(){
+  const arr = this.state.data
+  const arr2 = this.state.showData
+  arr.push(this.state.input)
+  arr2.push(this.state.input)
+  this.setState({
+    data:arr,
+    showData:arr2})
+  }
   // 删除数据
   delData =(index)=>{
     const arr = this.state.data
@@ -21,30 +32,30 @@ class App extends React.Component{
   }
   // 搜索数据
   search(){
-    const arr = this.state.data;
-    if(arr.indexOf(this.state.search)== -1){
-      arr.push(this.state.search);
-      this.setState({data:arr})
-
+    const arr = this.state.showData.filter((item,i)=>{
+      return item == this.state.search
+    })
+    if(arr.length == 0){
+       alert('未添加')
     }else{
-      alert('已添加')
+      this.setState({
+        showData:arr
+      })
     }
-    
   }
  
   onChange(i){
-    if(i.target.className == "add"){
+    if(i.target.className === "add"){
       this.setState({
         input:i.target.value
       })
-    }else if(i.target.className == "search"){
+    }else if(i.target.className === "search"){
       this.setState({
         search:i.target.value
       })
     }
     
   }
-  // 渲染
   render(){
     function todoList(props,delData){
     return(
@@ -65,9 +76,11 @@ class App extends React.Component{
     return(
       <div className = 'App'>
           <h2 className = 'title'>TodoList和Search</h2>
+          <input className='add' onChange={this.onChange}></input>
+          <button onClick={this.addData}>add</button>
           <input className='search' onChange={this.onChange}></input>
           <button onClick={this.search}>search</button>
-          {todoList(this.state.data,this.delData)}
+          {todoList(this.state.showData,this.delData)}
       </div>
     )
   }
