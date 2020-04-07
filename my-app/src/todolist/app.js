@@ -1,5 +1,5 @@
 import React from 'react';
-import todoList from './list';
+// import todoList from 'list';
 
 class App extends React.Component{
     constructor(props){
@@ -53,6 +53,22 @@ class App extends React.Component{
             }
         }
     render(){
+        function todoList(props,delData){
+            return(
+                <ul>{props.map(
+                            (item,i)=>{
+                                return (
+                                    <li key={i}>
+                                        <label>{item}</label>
+                                        <button onClick={()=>delData(i)}>delete</button>
+                                    </li>
+                                )
+                            }
+                        )
+                    }
+                </ul>
+            );
+        }
         return(
             <div className = 'App'>
                 <h2 className = 'title'>TodoList和Search</h2>
