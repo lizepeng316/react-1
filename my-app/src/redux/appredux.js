@@ -7,25 +7,9 @@ import {connect} from 'react-redux'
 
 
 class AppRedux extends React.Component{
-
-    todoList(toDoList,delData){
-        return(
-            <ul>{
-                toDoList.map(
-                        (item,i)=>{
-                            return (
-                                <li key={item.i}>
-                                    <label>{item.listname}</label>
-                                    <button onClick={()=>delData(item.id)}>delete</button>
-                                </li>
-                            )
-                        }
-                    )
-                }
-            </ul>
-        );
+    constructor(props){
+        super(props)
     }
-    
     render(){
         const {actions,toDoList} = this.props
         // console.log(this.props)

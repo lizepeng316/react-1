@@ -12,17 +12,18 @@ export const addData = listname => {
     }
 }
 // 删除数据action 
-export const delData = id => {
+export const delData = index => {
     return {
         type:delDataList,
-        id
+        index
     }
 }
 // 查找数据action 
-export const  search =listname => {
+export const  search =() => {
     return {
         type:searchList,
-        listname
+        listname,
+        index
     }
 }
 // 返回数据action 
